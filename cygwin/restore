@@ -1,0 +1,20 @@
+#!/bin/sh
+if [ -z "$1" -o -z "$2" ]
+then
+	echo "Usage: $0 dir1 dir2 -> push all the files in the directory 'dir1' in 'dir2/FILENAME/' "
+	echo "We are assuming the files are named 'packagename-versionnumber-extension', so the script leaves just 'packagename'"
+else
+	# Some set-up
+	curr_dir=$(pwd)
+	work_dir=$(readlink -f $1)
+	destination=$(readlink -f $2)
+	# Finding files and moving them
+	cd $work_dir
+	for file in $(find . -maxdepth 1 -type f); do 
+		dir=$(echo $file | sed 's/.\///' | sed 's/-[0-9].*//')
+		path=$(find $destination -name $dir)
+		#echo "$file -> $path" # For debugging
+		mv -v $file $path
+	done
+	cd $curr_dir
+fi

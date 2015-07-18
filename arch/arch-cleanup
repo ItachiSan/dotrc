@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# Based on the awesome tutorial: http://blog.andreascarpino.it/cleaning-an-arch-linux-installation/
+# This script creates a file with packages installed as explicit; so people can check which packages
+# are useless and they can remove them or set them as dependencies
+
+if [ -z "$(which pacman)" ]
+then
+	echo "No 'pacman' in your $PATH; not on Archlinux?"
+	return 1
+fi
+
+# Creating temporary files
+temp1=$(mktemp)
+temp2=$(mktemp)
+file="./to-check.txt"
+
+pacman -Sqg base base-devel | sort -u > $temp1
+pacman -Qqe | sort > $temp2
+comm -13 $temp1 $temp2 > $file
+
+echo "I've created the file $file which has all the packages installed as explicit"
+echo "You should read this file and mark the one you don't need as 'installed as dependency'"
+echo "You can achieve this using (as root):"
+echo "pacman -D --asdeps PACKAGE"
+echo "Then you can safely remove useless packages with (as root):"
+echo "pacman -Rs \$(pacman -Qtdq)"

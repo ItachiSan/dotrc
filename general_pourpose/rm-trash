@@ -1,0 +1,27 @@
+#!/bin/bash
+targets=('*Trashes' '*TemporaryItems' '.Trash*' '$RECYCLE.BIN' 'System*Information' '._*')
+
+if [ -z $1 ]
+then
+	echo "$0 directory-to-scan"
+	echo "Usage: removes some garbage elements."
+	echo "Files removed:"
+	echo "${targets[@]}"
+else
+	# Setting up the parameters for find
+	for i in ${targets[@]}
+	do
+		# Handle first parameter differently than others
+		if [ -z $first_done ]
+		then
+			args="-name $i"
+			first_done=true
+		else
+			args=$args" -or -name $i"
+		fi
+	done
+	
+	# Actually, find the garbage
+	#echo "find $1 $args"
+	find $1 $args -print0 | xargs -0 rm -rvf
+fi

@@ -1,0 +1,24 @@
+#!/bin/sh
+if [ -z "$1" -o -z "$2" ]
+then
+	echo "Usage: $0 dir1 dir2 -> push all the old packages in the directory 'dir1' in 'dir2' "
+	echo "We are assuming the files are named 'packagename-versionnumber-extension', so the script make checks using 'version-number'"
+else
+	# Some set-up
+	curr_dir=$(pwd)
+	work_dir=$(readlink -f $1)
+	destination=$(readlink -f $2)
+	# Let's work
+	cd $work_dir
+
+	for dir in $(find . -type d | sed 's/.\///'); do
+		cd $dir
+		# Move files
+		for file in $(find $work_dir/$dir -maxdepth 1 -type f | sort -r | tail -n +2); do
+			#echo "$file -> $destination"
+			mv -v $file $destination
+		done
+		cd $work_dir
+	done
+	cd $curr_dir
+fi

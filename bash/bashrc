@@ -1,0 +1,55 @@
+#
+# ~/.bashrc
+#
+
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+alias ls='ls --color=auto'
+#PS1='[\u@\h \W]\$ '
+
+## End of standard .bashrc
+
+# Including already present sweets
+
+# Some VTE defines -> should enable in GNOME Terminal 'remember actual folder' when opening a tab
+source /etc/profile.d/vte.sh
+
+# Gives an Ubuntu-like message when missing some commands
+source /usr/share/doc/pkgfile/command-not-found.bash 
+
+# Colors for most used commands yeeeeeeeeeeeeeeeeee
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+
+# Some other export/aliases for me
+export EDITOR='nano'
+export ANDROID_SDK_HOME='/mnt/data/Progetti/Apps/SDK_Win/linux'
+
+# Useful commands
+alias update-grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
+alias imon='ping -c 10 www.google.it'
+alias pbi='pastebinit -b paste.ubuntu.com'
+alias update-initramfs='sudo mkinitcpio -p linux'
+
+# For some management
+alias winecontrol='env WINEPREFIX=~/.wine-pipelight/ /opt/wine-compholio/bin/wine control'
+alias eoloapp='/opt/adobe-air-sdk/bin/adl -nodebug /opt/airapps/EOLOapp/META-INF/AIR/application.xml /opt/airapps/EOLOapp/'
+
+# Personal includes
+
+# Git-friendly prompt
+source ~/.bash/git.bashrc
+
+# Include Android stuff
+source ~/.bash/android.bashrc
+
+# AUR4 aliases
+source ~/.bash/aur4.bashrc
+
+# Junky functions
+source ~/.bash/junk.bashrc
+
+# Yaourt/Pacman utilities
+source ~/.bash/yaourt.bashrc

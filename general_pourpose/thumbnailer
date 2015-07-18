@@ -1,0 +1,40 @@
+#!/bin/bash
+extensions=(mp4 flv)
+if [ -d "$1" ]
+then
+	for ext in ${extensions[@]}
+	do
+		# The maaaaaagic
+		if [ -z $2 ]
+		then
+		find "$1" -type f -name "*.$ext" -print0 | sed "s/.$ext//g" | xargs -0 -Ifile ffmpegthumbnailer -i file.$ext -o file.jpg -q10
+		# Handle options
+		elif [ "$2" == "-debug" ]
+		then
+		# Print what we would do
+		find "$1" -type f -name "*.$ext" -print0 | sed "s/.$ext//g" | xargs -0 -Ifile echo "ffmpegthumbnailer -i file.$ext -o file.jpg -q10"
+		fi
+	done
+
+	if [ "$2" == "-count" ]
+	then
+		# Show extensions count
+		find "$1" -type f | sed "s/.*\.//" | sort | uniq -c
+	elif [ "$2" == "-delete" ]
+	then
+		# Cleanup old thumbnails
+		find "$1" -type f -name "*.jpg" -delete
+	fi
+
+else
+	echo "Usage: $0 directory [-debug | -count | -delete]"
+	echo "File extensions handled:"
+	for ext in ${extensions[@]}
+	do
+		echo "-> $ext"
+	done
+	echo "Options:"
+	echo "-debug: prints operations done"
+	echo "-count: prints file extensions count"
+	echo "-delete: deletes previously generated thumbnails (ALL .jpg FILES, NOTICE!)"
+fi
