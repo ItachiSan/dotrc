@@ -3,8 +3,9 @@ targets=('*Trashes' '*TemporaryItems' '.Trash*' '$RECYCLE.BIN' 'System*Informati
 
 if [ -z $1 ]
 then
-	echo "$0 directory-to-scan"
+	echo "$0 directory-to-scan [-debug]"
 	echo "Usage: removes some garbage elements."
+	echo "If you pass '-debug' as 2nd parameter, it will echo what it will do."
 	echo "Files removed:"
 	echo "${targets[@]}"
 else
@@ -22,6 +23,10 @@ else
 	done
 
 	# Actually, find the garbage
-	#echo "find $1 $args"
-	find $1 $args -print0 | xargs -0 rm -rvf
+	if [ "$2" == "-debug" ]
+	then
+		echo "find $1 $args | xargs -0 rm -rvf"
+	else
+		find $1 $args -print0 | xargs -0 rm -rvf
+	fi
 fi
