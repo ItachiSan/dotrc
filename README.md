@@ -7,4 +7,4 @@ E.g. if you distribute a script, add in the comments in the first lines a line w
 # Original input from Giovanni Santini <giovannisantini93@yahoo.it>: https://github.com/ItachiSan/linux_stuff
 ```
 You don't have to, but you should. I would do it.
-This code provides NO WARRANTY. Dragons ahead-
+This code provides NO WARRANTY. Dragons ahead!
