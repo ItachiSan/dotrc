@@ -7,12 +7,12 @@ alias yac='yaourt -Sc'
 
 # Cleanup and redownload of all the packages
 paccleanup() {
-    # Clean up cache
-    yaourt -Scc
-    # Download packages
-    yaourt -Sw $(yaourt -Qqn)
-    # AUR part
-    yaourt -Sb $(yaourt -Qqm)
+	# Clean up cache
+	yaourt -Scc
+	# Download packages
+	yaourt -Sw $(yaourt -Qqn)
+	# AUR part
+	yaourt -Sb $(yaourt -Qqm)
 }
 
 # See package usage size and biggest packages

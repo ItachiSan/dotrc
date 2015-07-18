@@ -20,7 +20,7 @@ else
 			args=$args" -or -name $i"
 		fi
 	done
-	
+
 	# Actually, find the garbage
 	#echo "find $1 $args"
 	find $1 $args -print0 | xargs -0 rm -rvf
