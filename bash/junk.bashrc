@@ -6,7 +6,8 @@ then
 	echo $0 "name_future_png -> creates 'name_future_png'.png as screenshot" 
 else
 	echo "Saving as " $1".png ..."
-	adb shell screencap -p | perl -pe 's/\x0D\x0A/\x0A/g' > $1.png
+	# Thanks to Koushik Dutta (Koush): https://plus.google.com/110558071969009568835/posts/Ar3FdhknHo3
+	adb exec-out screencap -p > $1.png
 fi
 }
 
