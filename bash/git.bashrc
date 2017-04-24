@@ -7,4 +7,5 @@
 
 source /usr/share/git/completion/git-prompt.sh
 export GIT_PS1_SHOWDIRTYSTATE=1
-PS1='\u@\h:\W $(__git_ps1 "(%s) ")\$ '
+export PROMPT_DIRTRIM=3
+PS1='\u@\h:\w $(__git_ps1 "(%s) ")\$ '

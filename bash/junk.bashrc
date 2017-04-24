@@ -1,4 +1,5 @@
-# Some junk functions I wrote... sometimes useful, sometimes not
+## Some junk functions I wrote... sometimes useful, sometimes not
+# Not even going to comment them.
 
 android-screen(){
 if [ -z $1 ]
@@ -22,7 +23,7 @@ webserver(){
 }
 
 # Fix Telegram Desktop launcher
-alias telegram-fix='sed "s/Exec=-- %u/Exec=telegram -- %u/" -i .local/share/applications/telegramdesktop.desktop'
+alias telegram-desktop-fix='sed "s/Exec=-- %u/Exec=telegram -- %u/" -i .local/share/applications/telegramdesktop.desktop'
 
 # To see disk usage
 function diskusage {
@@ -35,3 +36,10 @@ function diskusage {
 
 	du -ad1 $1 | sort -nr | cut -f 2 | tail -n +2 | xargs du -hd0
 }
+
+# Set percentage of PulseAudio through pactl
+alias pavolume='pactl set-sink-volume @DEFAULT_SINK@'
+
+# Swap between a modded resolv.conf file
+alias modresolve='sudo cp /etc/resolv.conf.modded /etc/resolv.conf'
+alias unmodresolve='sudo cp /etc/resolv.conf.bak /etc/resolv.conf'

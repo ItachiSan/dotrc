@@ -5,51 +5,37 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-alias ls='ls --color=auto'
+#. /etc/profile
 #PS1='[\u@\h \W]\$ '
-
+# Load manually profile and bash-completion
+source /etc/profile
 ## End of standard .bashrc
 
-# Including already present sweets
-
+## Including already present sweets
 # Some VTE defines -> should enable in GNOME Terminal 'remember actual folder' when opening a tab
 source /etc/profile.d/vte.sh
-
 # Gives an Ubuntu-like message when missing some commands
-source /usr/share/doc/pkgfile/command-not-found.bash 
+source /usr/share/doc/pkgfile/command-not-found.bash
 
-# Colors for most used commands yeeeeeeeeeeeeeeeeee
-alias grep='grep --color=auto'
-alias fgrep='fgrep --color=auto'
-alias egrep='egrep --color=auto'
-
-# Some other export/aliases for me
+## Some other export/aliases for me
 export EDITOR='nano'
 export ANDROID_SDK_HOME='/mnt/data/Progetti/Apps/SDK_Win/linux'
+export HISTSIZE=10000
+export GRADLE_USER_HOME="$HOME/.cache/gradle"
 
-# Useful commands
-alias update-grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
-alias imon='ping -c 10 www.google.it'
-alias pbi='pastebinit -b paste.ubuntu.com'
-alias update-initramfs='sudo mkinitcpio -p linux'
-
-# For some management
-alias winecontrol='env WINEPREFIX=~/.wine-pipelight/ /opt/wine-compholio/bin/wine control'
-alias eoloapp='/opt/adobe-air-sdk/bin/adl -nodebug /opt/airapps/EOLOapp/META-INF/AIR/application.xml /opt/airapps/EOLOapp/'
-
-# Personal includes
-
+## Personal includes
+# Expected location of the bashrc files
+BASHRC_LOCATION="$HOME/.bash"
+# Good aliases!
+source $BASHRC_LOCATION/aliases.bashrc
 # Git-friendly prompt
-source ~/.bash/git.bashrc
-
+source $BASHRC_LOCATION/git.bashrc
+# Pacaur/Pacman utilities
+source $BASHRC_LOCATION/pacman.bashrc
 # Include Android stuff
-source ~/.bash/android.bashrc
-
-# AUR4 aliases
-source ~/.bash/aur4.bashrc
-
+source $BASHRC_LOCATION/android.bashrc
 # Junky functions
-source ~/.bash/junk.bashrc
-
-# Yaourt/Pacman utilities
-source ~/.bash/yaourt.bashrc
+source $BASHRC_LOCATION/junk.bashrc
+## Dismissed
+# AUR4 aliases
+#source $BASHRC_LOCATION/aur4.bashrc
