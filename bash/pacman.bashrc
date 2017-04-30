@@ -1,6 +1,15 @@
 ## Management stuff
+# Use 'meld' for pacdiff.
+export DIFFPROG='meld'
+# Directory for sources download and build using pacaur.
+export AURDEST='/mnt/build/archlinux/chroots/pacaur'
 # Fucking nice printing of big packages
 alias big-packages='expac -H M "%m\t%n" | sort -hr'
+# Show development packages
+alias development-packages="pacaur -Qmq | \
+	egrep 'git|svn|bzr|csv' | \
+	tr '\n' ' ' | \
+	xargs echo"
 # Pacaur shortcuts
 alias pacup='pacaur -Syyua'
 alias pacusl='pacaur -Rs $(pacaur -Qtdq)'

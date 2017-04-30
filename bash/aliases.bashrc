@@ -17,6 +17,8 @@ alias less='less -R'
 alias xz='xz -evT0'
 # What day is today?
 alias today='date +%Y-%m-%d'
+# Copy LastPass password to clipboard
+alias lpclip='lpass show --clip --password'
 
 ## Network-related stuff
 # I usually don't want to ping forever. 10 times is enough.
