@@ -74,3 +74,5 @@ SECURE_BOOT_PATH="/sys/firmware/efi/efivars/SecureBoot-8be4df61-93ca-11d2-aa0d-0
 alias secure-boot="od -An -t u1 $SECURE_BOOT_PATH \
 	| sed 's/\s\+/ /g' \
 	| cut -d' ' -f6"
+# Fix not running tmux
+alias tmux_restart="pgrep tmux | xargs kill -s SIGUSR1"
