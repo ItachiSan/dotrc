@@ -9,12 +9,13 @@ setterm --blength 0 &>/dev/null
 # ... and blanking
 setterm --blank 0 &>/dev/null
 # Enter TMUX if we are on a TTY
-[ "$TERM" == "linux" ] && tmux
+# ... No, I can enable it manually in case
+#[ "$TERM" == "linux" ] && tmux
 
 #. /etc/profile
 #PS1='[\u@\h \W]\$ '
 # Load manually profile and bash-completion
-source /etc/profile
+#source /etc/profile
 ## End of standard .bashrc
 
 ## Including already present sweets
@@ -25,12 +26,20 @@ source /usr/share/doc/pkgfile/command-not-found.bash
 
 ## Some other export/aliases for me
 export EDITOR='vim'
+export BROWSER='firefox'
 export ANDROID_SDK_HOME='/mnt/data/Progetti/Apps/SDK_Win/linux'
 export HISTSIZE=10000
 export GRADLE_USER_HOME="$HOME/.cache/gradle"
+export PATH="$PATH:$HOME/.local/bin"
+
+# Allow QT5 apps theming using qt5ct
+#export QT_QPA_PLATFORMTHEME=qt5ct
 
 # Read allowed colors
 eval `dircolors --sh`
+
+# FUCK!
+eval `thefuck --alias`
 
 ## Personal includes
 # Expected location of the bashrc files
@@ -48,3 +57,9 @@ source $BASHRC_LOCATION/junk.bashrc
 ## Dismissed
 # AUR4 aliases
 #source $BASHRC_LOCATION/aur4.bashrc
+
+# Allow terminal-based app to use the GNOME keyring
+if [ -n "$DESKTOP_SESSION" ];then
+    eval $(gnome-keyring-daemon --start)
+    export SSH_AUTH_SOCK
+fi
